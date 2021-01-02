@@ -61,3 +61,23 @@ Of course, there are also specializations of UnaryOperator and BinaryOperator th
 
 https://www.baeldung.com/java-8-functional-interfaces
 
+### 2. What is Constructor Chaining in Java
+
+Java constructor chaining is a method of calling one constructor with the help of another while considering the present object.
+It can be done in 2 ways –
+
+* Within same class: It can be done using this() keyword for constructors in the same class.
+* From base class: By using super() keyword to call a constructor from the base class.
+
+https://data-flair.training/blogs/constructor-chaining-in-java/
+
+### 3. DateTime API vs Date/Calendar
+
+The new API is driven by three core ideas:
+
+* Immutable-value classes. One of the serious weaknesses of the existing formatters (like java.util.SimpleDateFormat) in Java is that they aren’t thread-safe.
+* Domain-driven design. The new API models its domain very precisely with classes that represent different use cases for Date and Time closely. This emphasis on domain-driven design offers long-term benefits around clarity and understandability, but you might need to think through your application’s domain model of dates when porting from previous APIs to Java SE 8.
+* Separation of chronologies. The new API allows people to work with different “non-ISO-8601” calendaring systems, like one used in Japan or Thailand.
+
+https://programminghints.com/2017/05/still-using-java-util-date-dont/
+https://codeblog.jonskeet.uk/2017/04/23/all-about-java-util-date/
