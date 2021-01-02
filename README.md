@@ -80,4 +80,42 @@ The new API is driven by three core ideas:
 * Separation of chronologies. The new API allows people to work with different “non-ISO-8601” calendaring systems, like one used in Japan or Thailand.
 
 https://programminghints.com/2017/05/still-using-java-util-date-dont/
+
 https://codeblog.jonskeet.uk/2017/04/23/all-about-java-util-date/
+
+### 4. HashSet vs. TreeSet in Java
+
+HashSet
+* Null values can be added
+* No fixed iteration order
+* Heterogenous values are allowed
+* Time complexity for insertion/deletion/retrieval: O(1)
+* Implements the Set interface
+
+TreeSet
+* Nulls aren’t allowed
+* Iteration over items is in natural order or a given Comparator is used
+* Only homogenous values are allowed
+* Time complexity for the same operations: O(log n)
+* Implements the NavigableMapinterface
+
+https://www.educative.io/edpresso/hashset-vs-treeset-in-java
+
+### 5. Can we Overload or Override static methods in java?
+
+We can declare static methods with the same signature in the subclass, but it is not considered overriding as there won’t be any run-time polymorphism. Hence the answer is ‘No’. If a derived class defines a static method with the same signature as a static method in the base class, the method in the derived class hides the method in the base class.
+
+The following are some important points for method overriding and static methods in Java.
+
+1) For class (or static) methods, the method according to the type of reference is called, not according to the object being referred, which means method call is decided at compile time.
+
+2) For instance (or non-static) methods, the method is called according to the type of object being referred, not according to the type of reference, which means method calls is decided at run time.
+
+3) An instance method cannot override a static method, and a static method cannot hide an instance method. For example, the following program has two compiler errors.
+
+4) In a subclass (or Derived Class), we can overload the methods inherited from the superclass. Such overloaded methods neither hide nor override the superclass methods — they are new methods, unique to the subclass.
+
+https://www.geeksforgeeks.org/can-we-overload-or-override-static-methods-in-java/
+
+### 6. Overriding Rules
+
