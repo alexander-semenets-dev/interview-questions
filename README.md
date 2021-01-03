@@ -117,5 +117,137 @@ The following are some important points for method overriding and static methods
 
 https://www.geeksforgeeks.org/can-we-overload-or-override-static-methods-in-java/
 
-### 6. Overriding Rules
+### 6. Method Overriding Rules
 
+With respect to the method it overrides, the overriding method must follow following mandatory rules:
+
+* It must have the same method name.
+* It must have the same arguments.
+* It must have the same return type. From Java 5 onward, the return type can also be a subclass (subclasses are a covariant type to their parents).
+* It must not have a more restrictive access modifier (if parent --> protected then child --> private is not allowed).
+* It must not throw new or broader checked exceptions.
+
+And if both overriding methods follow the above mandatory rules, then they:
+
+* May have a less restrictive access modifier (if parent --> protected then child --> public is allowed).
+* May throw fewer or narrower checked exceptions or any unchecked exception.
+
+Apart from the above rules, there are also some facts to keep in mind:
+
+* Only inherited methods can be overridden. That means methods can be overridden only in child classes.
+* Constructors and private methods are not inherited, so they cannot be overridden.
+* Abstract methods must be overridden by the first concrete (non-abstract) subclass.
+* final methods cannot be overridden.
+* A subclass can use super.overridden_method() to call the superclass version of an overridden method.
+
+https://dzone.com/articles/everything-about-method-overloading-vs-method-overriding
+
+### 7. Method Overloading Rules
+
+Two methods will be treated as overloaded if both follow the mandatory rules below:
+
+* Both must have the same method name.
+* Both must have different argument lists.
+
+And if both methods follow the above mandatory rules, then they may or may not:
+
+* Have different return types.
+* Have different access modifiers.
+* Throw different checked or unchecked exceptions.
+
+https://dzone.com/articles/everything-about-method-overloading-vs-method-overriding
+
+### 8. What is an Abstract Class and Abstract Method in Java?
+
+* An abstract class is a class that is declared abstract
+* Abstract classes cannot be instantiated
+* Abstract classes can be subclassed
+* It may or may not include abstract methods
+* When an abstract class is subclassed, the subclass usually provides implementations for all of the abstract methods in its parent class
+* If subclass doesn’t provide implementations then the subclass must also be declared abstract.
+
+Of course yes. Declaring a class abstract only means that you don’t allow it to be instantiated on its own. You can’t have an abstract method in a non-abstract class.
+
+### 9. What Is an Interface in Java?
+
+### 10. Java String Pool
+
+Thanks to the immutability of Strings in Java, the JVM can optimize the amount of memory allocated for them by storing only one copy of each literal String in the pool. This process is called interning.
+
+When we create a String variable and assign a value to it, the JVM searches the pool for a String of equal value.
+
+If found, the Java compiler will simply return a reference to its memory address, without allocating additional memory.
+
+If not found, it'll be added to the pool (interned) and its reference will be returned.
+
+When we create a String via the new operator, the Java compiler will create a new object and store it in the heap space reserved for the JVM.
+
+Every String created like this will point to a different memory region with its own address.
+
+We can manually intern a String in the Java String Pool by calling the intern() method on the object we want to intern.
+
+Manually interning the String will store its reference in the pool, and the JVM will return this reference when needed.
+
+Before Java 7, the JVM placed the Java String Pool in the PermGen space, which has a fixed size — it can't be expanded at runtime and is not eligible for garbage collection.
+
+The risk of interning Strings in the PermGen (instead of the Heap) is that we can get an OutOfMemory error from the JVM if we intern too many Strings.
+
+From Java 7 onwards, the Java String Pool is stored in the Heap space, which is garbage collected by the JVM. The advantage of this approach is the reduced risk of OutOfMemory error because unreferenced Strings will be removed from the pool, thereby releasing memory.
+
+### 11. Instanceof With null
+
+The Java instanceof operator always evaluates to false when a null variable is compared against any class or interface. Here is a Java instanceof example illustrating the comparison of null against a class:
+
+Map<Object, Object> map = null;
+
+boolean mapIsObject = map instanceof Map;
+
+### 12. Race Conditions
+
+A race condition occurs when two or more operations must execute in the correct
+order, but the program has not been written so that this order is guaranteed to be
+maintained.
+
+Most of the time, this shows up in what’s called a data race, where one concurrent
+operation attempts to read a variable while at some undetermined time another con‐
+current operation is attempting to write to the same variable.
+
+### 13. Deadlock
+
+A deadlocked program is one in which all concurrent processes are waiting on one
+another. In this state, the program will never recover without outside intervention.
+
+It turns out there are a few conditions that must be present for deadlocks to arise. The conditions are now known as the Coffman Conditions and are the basis for techniques that help detect, prevent, and correct deadlocks.
+
+The Coffman Conditions are as follows:
+
+* Mutual Exclusion
+A concurrent process holds exclusive rights to a resource at any one time.
+
+* Wait For Condition
+A concurrent process must simultaneously hold a resource and be waiting for an
+additional resource.
+
+* No Preemption
+A resource held by a concurrent process can only be released by that process, so
+it fulfills this condition.
+
+* Circular Wait
+A concurrent process (P1) must be waiting on a chain of other concurrent pro‐
+cesses (P2), which are in turn waiting on it (P1), so it fulfills this final condition
+too.
+
+#### Livelock
+
+Livelocks are programs that are actively performing concurrent operations, but these operations do nothing to move the state of the program forward.
+
+Have you ever been in a hallway walking toward another person? She moves to one side to let you pass, but you’ve just done the same. So you move to the other side, but
+she’s also done the same. Imagine this going on forever, and you understand livelocks.
+
+#### Starvation
+
+Starvation is any situation where a concurrent process cannot get all the resources it needs to perform work.
+
+When we discussed livelocks, the resource each goroutine was starved of was a shared lock. Livelocks warrant discussion separate from starvation because in a live‐lock, all the concurrent processes are starved equally, and no work is accomplished.
+
+More broadly, starvation usually implies that there are one or more greedy concurrent process that are unfairly preventing one or more concurrent processes from accomplishing work as efficiently as possible, or maybe at all.
